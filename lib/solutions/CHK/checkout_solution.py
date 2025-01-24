@@ -47,4 +47,9 @@ def _apply_special_offer(item_counts: Counter) -> int:
 
 
 def _apply_free_offer(item_counts: Counter) -> int:
-    
+    total_price = 0
+    for item, (required_qty, free_item) in FREE_OFFERS.items():
+        if item in item_counts and free_item in item_counts:
+            free_item_count = item_counts[free_item]
+            item_count = item_counts[item]
+            
