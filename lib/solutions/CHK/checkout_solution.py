@@ -51,7 +51,8 @@ SAME_ITEM_FREE_OFFERS = {
 }
 
 GROUP_DISCOUNT_ITEMS = {"S", "T", "X", "Y", "Z"}
-
+GROUP_DISCOUNT_PRICE = 45
+GROUP_DISCOUNT_COUNT = 3
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -99,4 +100,8 @@ def _apply_same_item_free_offer(item_counts: Counter) -> Counter:
             free_count = item_counts[item] // required_qty
             item_counts[item] = max(0, item_counts[item] - free_count)
     return item_counts
+
+
+def _apply_group_discount(item_counts: Counter) -> int:
+    pass
 
