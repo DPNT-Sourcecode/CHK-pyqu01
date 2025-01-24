@@ -5,7 +5,8 @@ PRICE_TABLE = {
     "B": 30,
     "C": 20,
     "D": 15,
-    "E": 40
+    "E": 40,
+    "F": 10
 }
 
 SPECIAL_OFFERS = {
@@ -14,8 +15,11 @@ SPECIAL_OFFERS = {
 }
 
 FREE_OFFERS = {
-    "E": (2, "B")
+    "E": (2, "B"),
+    "F": (2, "F")
 }
+
+
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus: str) -> int:
@@ -53,5 +57,6 @@ def _apply_free_offer(item_counts: Counter) -> Counter:
             free_count = item_counts[item] // required_qty
             item_counts[free_item] = max(0, item_counts[free_item] - free_count)
     return item_counts
+
 
 
