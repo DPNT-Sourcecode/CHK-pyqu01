@@ -1,3 +1,4 @@
+from collections import Counter
 
 PRICE_TABLE = {
     "A": 50,
@@ -18,4 +19,15 @@ def checkout(skus: str) -> int:
         if sku not in PRICE_TABLE:
             return -1
 
-    
+    item_counts = Counter(skus)
+    total_price = 0
+
+    for sku, count in item_counts.items():
+        if sku in SPECIAL_OFFERS:
+            special_offer_count, special_offer_price = SPECIAL_OFFERS[sku]
+            special_offer_count = count // special_offer_count
+            total_price += special_offer_count * special_offer_price
+            count -= special_offer_count * special_offer_count
+
+        total_price += count * PRICE_TABLE[sku]
+
