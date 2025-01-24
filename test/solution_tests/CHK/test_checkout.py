@@ -50,5 +50,25 @@ class TestCHK():
     def test_checkout_special_offer(self, skus, expected):
         assert checkout_solution.checkout(skus) == expected
 
+    @pytest.mark.parametrize(
+        ("skus", "expected"),
+        [
+            ("EEB", 80),
+            ("EEBB", 110),
+            # One B is free, two Bs are 45
+            ("EEBBB", 125),
+            ("EEEE", 160),
+            ("NNNM", 120),
+            ("NNNN", 160),
+            ("NNNNNM", 200),
+            ("RRRQ", 150),
+            ("RRRR", 200),
+            ("RRRRRQ", 250),
+        ]
+    )
+    def test_checkout_free_offer(self, skus, expected):
+        assert checkout_solution.checkout(skus) == expected
+
+
 
 
