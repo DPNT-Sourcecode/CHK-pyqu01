@@ -27,6 +27,12 @@ def checkout(skus: str) -> int:
     item_counts = Counter(skus)
     total_price = 0
 
+    total_price += _apply_special_offer(item_counts)
+    return total_price
+
+
+def _apply_special_offer(item_counts: Counter) -> int:
+    total_price = 0
     for sku, count in item_counts.items():
         if sku in SPECIAL_OFFERS:
             special_offer_count, special_offer_price = SPECIAL_OFFERS[sku]
@@ -40,5 +46,5 @@ def checkout(skus: str) -> int:
     return total_price
 
 
-def _apply_special_offer(item_counts):
-    pass
+def _apply_free_offer(item_counts: Counter) -> int:
+    
