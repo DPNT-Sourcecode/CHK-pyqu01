@@ -47,7 +47,7 @@ class TestCHK():
             ("VVVVVV", 260)
         ]
     )
-    def test_checkout_special_offer(self, skus, expected):
+    def test_checkout__special_offer(self, skus, expected):
         assert checkout_solution.checkout(skus) == expected
 
     @pytest.mark.parametrize(
@@ -66,8 +66,28 @@ class TestCHK():
             ("RRRRRQ", 250),
         ]
     )
-    def test_checkout_free_offer(self, skus, expected):
+    def test_checkout__free_offer(self, skus, expected):
         assert checkout_solution.checkout(skus) == expected
+
+    @pytest.mark.parametrize(
+        ("skus", "expected"),
+        [
+            ("FF", 20),
+            ("FFF", 20),
+            ("FFFF", 30),
+            ("FFFFFF", 40),
+            ("UUU", 120),
+            ("UUUU", 120),
+            ("UUUUUUU", 240),
+        ]
+    )
+    def test_checkout__same_item_free_offer(self, skus, expected):
+        assert checkout_solution.checkout(skus) == expected
+
+    def test_checkout__edge_cases(self):
+        assert checkout_solution.checkout("") == 0
+        assert checkout_solution.checkout("123") == -1
+
 
 
 
