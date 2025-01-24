@@ -1,6 +1,16 @@
-from solutions.SUM import sum_solution
+from solutions.CHK import checkout_solution
+import pytest
 
 
-class TestSum():
-    def test_sum(self):
-        assert sum_solution.compute(1, 2) == 3
+class TestCHK():
+    @pytest.mark.parametrize(
+        ("skus", "expected"),
+        [
+            ("A", 50),
+            ("ABCDG", -1),
+            ("AAAB", )
+        ]
+    )
+    def test_checkout(self, skus: str, expected: int):
+        assert checkout_solution.checkout(skus) == expected
+
