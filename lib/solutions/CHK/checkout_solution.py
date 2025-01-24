@@ -25,15 +25,15 @@ PRICE_TABLE = {
     "V": 50,
     "W": 20,
     "X": 17,
-    "Y": 10,
-    "Z": 50,
+    "Y": 20,
+    "Z": 21,
 }
 
 SPECIAL_OFFERS = {
     "A": [(5, 200), (3, 130)],
     "B": [(2, 45)],
     "H": [(10, 80), (5, 45)],
-    "K": [(2, 150)],
+    "K": [(2, 120)],
     "P": [(5, 200)],
     "Q": [(3, 80)],
     "V": [(3, 130), (2, 90)],
@@ -132,6 +132,7 @@ def _apply_group_discount(
     for item, count in remaining_item_counts.items():
         item_counts[item] = count
     return total_price, item_counts
+
 
 
 

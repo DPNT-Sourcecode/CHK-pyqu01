@@ -29,8 +29,8 @@ class TestCHK:
             ("ABBBD", 140),
             ("HHHHHHHHHH", 80),
             ("HHHHHHHHHHHHHHHH", 135),
-            ("KK", 150),
-            ("KKK", 230),
+            ("KK", 120),
+            ("KKK", 190),
             ("PPPPPPP", 300),
             ("QQQQ", 110),
             ("VVVV", 180),
@@ -83,14 +83,15 @@ class TestCHK:
         ("skus", "expected"),
         [
             ("STX", 45),
-            ("SSTX", 65),
-            ("SSXXY", 72),
+            ("SSTX", 62),
+            ("SSXXY", 79),
             ("ZZZT", 65),
             ("ZZZSTX", 90),
         ],
     )
     def test_checkout__group_discount(self, skus, expected):
         assert checkout_solution.checkout(skus) == expected
+
 
 
 
