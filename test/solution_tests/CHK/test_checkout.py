@@ -19,9 +19,14 @@ class TestCHK():
             ("EEEE", 160),
             ("AAAAA", 200),
             ("AAAAAA", 250),
-            ("AAAAAAA", 300)
+            ("AAAAAAA", 300),
+            ("FF", 20),
+            ("FFF", 20),
+            ("FFFF", 30),
+            ("FFFFFF", 40)
         ]
     )
     def test_checkout(self, skus: str, expected: int):
         assert checkout_solution.checkout(skus) == expected
+
 
