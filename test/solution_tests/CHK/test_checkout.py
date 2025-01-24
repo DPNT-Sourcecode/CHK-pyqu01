@@ -79,8 +79,11 @@ class TestCHK():
         ("skus", "expected"),
         [
             ("STX", 45),
+            ("SSTX", 65),
+            ("SSXXY", 85),
         ]
     )
     def test_checkout__group_discount(self, skus, expected):
         assert checkout_solution.checkout(skus) == expected
+
 

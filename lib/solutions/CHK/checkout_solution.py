@@ -70,7 +70,6 @@ def checkout(skus: str) -> int:
     total_price, item_counts = _apply_group_discount(
         item_counts, GROUP_DISCOUNT_ITEMS, GROUP_DISCOUNT_PRICE, GROUP_DISCOUNT_COUNT
     )
-    import pdb;pdb.set_trace()
     total_price += _apply_special_offer(item_counts, SPECIAL_OFFERS)
     return total_price
 
@@ -119,6 +118,7 @@ def _apply_group_discount(
     for item in group_discount_items:
         if item in item_counts:
             group_items.extend([item] * item_counts[item])
+            item_counts[item] = 0
 
     # Sort items by price, apply discount to the most expensive items
     group_items.sort(reverse=True, key=lambda x: PRICE_TABLE[x])
@@ -127,10 +127,10 @@ def _apply_group_discount(
         total_price += group_discount_price
         group_items = group_items[group_discount_count:]
 
-    import pdb;pdb.set_trace()
     # Update remaining items
     remaining_item_counts = Counter(group_items)
     for item, count in remaining_item_counts.items():
         item_counts[item] = count
     return total_price, item_counts
+
 
