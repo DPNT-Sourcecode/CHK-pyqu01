@@ -26,10 +26,12 @@ def checkout(skus: str) -> int:
         if sku in SPECIAL_OFFERS:
             special_offer_count, special_offer_price = SPECIAL_OFFERS[sku]
             if count >= special_offer_count:
-                special_offer_count = count // special_offer_count
-                total_price += special_offer_count * special_offer_price
-                count -= special_offer_count * special_offer_count
+                apply_count = count // special_offer_count
+                total_price += apply_count * special_offer_price
+                count -= apply_count * special_offer_count
 
         total_price += count * PRICE_TABLE[sku]
+    return total_price
+
 
 
