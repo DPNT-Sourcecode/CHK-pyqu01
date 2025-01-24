@@ -54,6 +54,7 @@ GROUP_DISCOUNT_ITEMS = {"S", "T", "X", "Y", "Z"}
 GROUP_DISCOUNT_PRICE = 45
 GROUP_DISCOUNT_COUNT = 3
 
+
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus: str) -> int:
@@ -66,7 +67,9 @@ def checkout(skus: str) -> int:
     item_counts = _apply_free_offer(item_counts)
     item_counts = _apply_same_item_free_offer(item_counts)
 
-    total_price, item_counts = _apply_group_discount(item_counts)
+    total_price, item_counts = _apply_group_discount(
+        item_counts, GROUP_DISCOUNT_ITEMS, GROUP_DISCOUNT_PRICE, GROUP_DISCOUNT_COUNT
+    )
     total_price += _apply_special_offer(item_counts)
     return total_price
 
@@ -102,24 +105,30 @@ def _apply_same_item_free_offer(item_counts: Counter) -> Counter:
     return item_counts
 
 
-def _apply_group_discount(item_counts: Counter) -> tuple[int, Counter]:
+def _apply_group_discount(
+    item_counts: Counter,
+    group_discount_items: set,
+    group_discount_price: int,
+    group_discount_count: int,
+) -> tuple[int, Counter]:
     total_price = 0
     group_items = []
-    for item in GROUP_DISCOUNT_ITEMS:
+    for item in group_discount_items:
         if item in item_counts:
             group_items.extend([item] * item_counts[item])
 
     # Sort items by price, apply discount to the most expensive items
     group_items.sort(reverse=True, key=lambda x: PRICE_TABLE[x])
 
-    while len(group_items) >= GROUP_DISCOUNT_COUNT:
-        total_price += GROUP_DISCOUNT_PRICE
-        group_items = group_items[GROUP_DISCOUNT_COUNT:]
+    while len(group_items) >= group_discount_count:
+        total_price += group_discount_price
+        group_items = group_items[group_discount_count:]
 
     # Update remaining items
     remaining_item_counts = Counter(group_items)
     for item, count in remaining_item_counts.items():
         item_counts[item] = count
     return total_price, item_counts
+
 
 
