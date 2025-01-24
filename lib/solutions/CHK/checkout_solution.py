@@ -25,6 +25,7 @@ def checkout(skus: str) -> int:
             return -1
 
     item_counts = Counter(skus)
+    item_counts = _apply_free_offer(item_counts)
     total_price = 0
 
     total_price += _apply_special_offer(item_counts)
@@ -46,10 +47,10 @@ def _apply_special_offer(item_counts: Counter) -> int:
     return total_price
 
 
-def _apply_free_offer(item_counts: Counter) -> int:
-    total_price = 0
+def _apply_free_offer(item_counts: Counter) -> Counter:
     for item, (required_qty, free_item) in FREE_OFFERS.items():
         if item in item_counts and free_item in item_counts:
-            free_item_count = item_counts[free_item]
-            item_count = item_counts[item]
-            
+            free_count = item_counts[free_item] // required_qty
+            item_counts[free_item] = max(0, item_counts[free_item] - free_count)
+    return item_counts
+
