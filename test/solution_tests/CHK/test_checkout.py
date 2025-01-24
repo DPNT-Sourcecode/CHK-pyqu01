@@ -28,5 +28,3 @@ class TestCHK():
     )
     def test_checkout(self, skus: str, expected: int):
         assert checkout_solution.checkout(skus) == expected
-
-
