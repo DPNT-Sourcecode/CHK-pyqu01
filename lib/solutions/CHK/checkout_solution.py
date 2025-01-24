@@ -104,7 +104,10 @@ def _apply_same_item_free_offer(item_counts: Counter) -> Counter:
 
 def _apply_group_discount(item_counts: Counter) -> int:
     total_price = 0
-    current_group_item_count = 0
-    for item, count in item_counts.items():
-        pass
+    group_items = []
+    for item in GROUP_DISCOUNT_ITEMS:
+        if item in item_counts:
+            group_items.extend([item] * item_counts[item])
+
+    group_items.
 
