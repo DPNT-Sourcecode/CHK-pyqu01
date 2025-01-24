@@ -7,10 +7,12 @@ class TestCHK():
         ("skus", "expected"),
         [
             ("A", 50),
-            ("ABCDG", -1),
-            ("AAAB", )
+            ("XYZ", -1),
+            ("AAABB", 175),
+            ("AAAAC", 200),
+            ("ABBBD", 140),
+            ("", 0)
         ]
     )
     def test_checkout(self, skus: str, expected: int):
         assert checkout_solution.checkout(skus) == expected
-
