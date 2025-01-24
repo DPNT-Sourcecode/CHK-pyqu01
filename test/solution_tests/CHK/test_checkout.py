@@ -11,7 +11,7 @@ class TestCHK:
             # One Q is free, 3Qs discount not applied
             ("QQQRRRUUUU", 330),
             ("QQQQRRRUUUU", 350),
-            ("STXYYAAABBBEE", 320),
+            ("STXYYAAABBBEE", 337),
         ],
     )
     def test_checkout__mixed_cases(self, skus: str, expected: int):
@@ -91,6 +91,7 @@ class TestCHK:
     )
     def test_checkout__group_discount(self, skus, expected):
         assert checkout_solution.checkout(skus) == expected
+
 
 
 
