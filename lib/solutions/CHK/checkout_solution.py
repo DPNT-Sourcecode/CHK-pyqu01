@@ -109,5 +109,15 @@ def _apply_group_discount(item_counts: Counter) -> int:
         if item in item_counts:
             group_items.extend([item] * item_counts[item])
 
-    group_items.
+    # Sort items by price, apply discount to the most expensive items
+    group_items.sort(reverse=True, key=lambda x: PRICE_TABLE[x])
+
+    while len(group_items) >= GROUP_DISCOUNT_COUNT:
+        total_price += GROUP_DISCOUNT_PRICE
+        group_items = group_items[GROUP_DISCOUNT_COUNT:]
+
+    # Update remaining items
+    remaining_item_counts = Counter(group_items)
+    for item, count in remaining_item_counts.items():
+        item_counts[item] = count
 
