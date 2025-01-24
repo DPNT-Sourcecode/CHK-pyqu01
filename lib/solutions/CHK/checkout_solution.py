@@ -4,12 +4,17 @@ PRICE_TABLE = {
     "A": 50,
     "B": 30,
     "C": 20,
-    "D": 15
+    "D": 15,
+    "E": 40
 }
 
 SPECIAL_OFFERS = {
     "A": (3, 130),
     "B": (2, 45)
+}
+
+FREE_OFFERS = {
+    "E": (2, "B")
 }
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -33,3 +38,7 @@ def checkout(skus: str) -> int:
 
         total_price += count * PRICE_TABLE[sku]
     return total_price
+
+
+def _apply_special_offer(item_counts):
+    pass
