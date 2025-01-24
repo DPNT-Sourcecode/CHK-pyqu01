@@ -11,6 +11,7 @@ class TestCHK():
             # One Q is free, 3Qs discount not applied
             ("QQQRRRUUUU", 330),
             ("QQQQRRRUUUU", 350),
+            ()
         ]
     )
     def test_checkout__mixed_cases(self, skus: str, expected: int):
@@ -74,3 +75,18 @@ class TestCHK():
     def test_checkout__edge_cases(self):
         assert checkout_solution.checkout("") == 0
         assert checkout_solution.checkout("123") == -1
+
+    @pytest.mark.parametrize(
+        ("skus", "expected"),
+        [
+            ("FF", 20),
+            ("FFF", 20),
+            ("FFFF", 30),
+            ("FFFFFF", 40),
+            ("UUU", 120),
+            ("UUUU", 120),
+            ("UUUUUUU", 240),
+        ]
+    )
+    def test_checkout__group_discount(self, skus, expected):
+        assert checkout_solution.checkout(skus) == expected
