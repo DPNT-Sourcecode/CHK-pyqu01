@@ -74,10 +74,3 @@ class TestCHK():
     def test_checkout__edge_cases(self):
         assert checkout_solution.checkout("") == 0
         assert checkout_solution.checkout("123") == -1
-
-
-
-
-
-
-

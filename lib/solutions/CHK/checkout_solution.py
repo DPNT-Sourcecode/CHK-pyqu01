@@ -96,5 +96,3 @@ def _apply_same_item_free_offer(item_counts: Counter) -> Counter:
             free_count = item_counts[item] // required_qty
             item_counts[item] = max(0, item_counts[item] - free_count)
     return item_counts
-
-
