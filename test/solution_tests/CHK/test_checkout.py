@@ -8,8 +8,9 @@ class TestCHK():
         [
             # One B is free
             ("AAABBBEE", 255),
-            
-            ("QQQRRRUUUU", 330)
+            # One Q is free, 3Qs discount not applied
+            ("QQQRRRUUUU", 330),
+            ("QQQQRRRUUUU", 350),
         ]
     )
     def test_checkout__mixed_cases(self, skus: str, expected: int):
@@ -73,6 +74,7 @@ class TestCHK():
     def test_checkout__edge_cases(self):
         assert checkout_solution.checkout("") == 0
         assert checkout_solution.checkout("123") == -1
+
 
 
 
