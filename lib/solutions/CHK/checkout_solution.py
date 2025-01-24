@@ -9,7 +9,7 @@ PRICE_TABLE = {
 }
 
 SPECIAL_OFFERS = {
-    "A": [(3, 130), (5, 200)],
+    "A": [(5, 200), (3, 130)],
     "B": [(2, 45)]
 }
 
@@ -36,12 +36,12 @@ def _apply_special_offer(item_counts: Counter) -> int:
     total_price = 0
     for sku, count in item_counts.items():
         if sku in SPECIAL_OFFERS:
-            special_offer_count, special_offer_price = SPECIAL_OFFERS[sku]
-            # Only apply special offer if there are enough items
-            if count >= special_offer_count:
-                apply_count = count // special_offer_count
-                total_price += apply_count * special_offer_price
-                count -= apply_count * special_offer_count
+            for special_offer_count, special_offer_price in SPECIAL_OFFERS[sku]:
+                # Only apply special offer if there are enough items
+                if count >= special_offer_count:
+                    apply_count = count // special_offer_count
+                    total_price += apply_count * special_offer_price
+                    count -= apply_count * special_offer_count
 
         total_price += count * PRICE_TABLE[sku]
     return total_price
@@ -53,4 +53,5 @@ def _apply_free_offer(item_counts: Counter) -> Counter:
             free_count = item_counts[item] // required_qty
             item_counts[free_item] = max(0, item_counts[free_item] - free_count)
     return item_counts
+
 
