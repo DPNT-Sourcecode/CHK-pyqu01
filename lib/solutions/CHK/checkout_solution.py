@@ -65,8 +65,8 @@ def checkout(skus: str) -> int:
     item_counts = Counter(skus)
     item_counts = _apply_free_offer(item_counts)
     item_counts = _apply_same_item_free_offer(item_counts)
-    total_price = 0
 
+    total_price, item_counts = _apply_group_discount(item_counts)
     total_price += _apply_special_offer(item_counts)
     return total_price
 
@@ -102,7 +102,7 @@ def _apply_same_item_free_offer(item_counts: Counter) -> Counter:
     return item_counts
 
 
-def _apply_group_discount(item_counts: Counter) -> int:
+def _apply_group_discount(item_counts: Counter) -> tuple[int, Counter]:
     total_price = 0
     group_items = []
     for item in GROUP_DISCOUNT_ITEMS:
@@ -120,4 +120,6 @@ def _apply_group_discount(item_counts: Counter) -> int:
     remaining_item_counts = Counter(group_items)
     for item, count in remaining_item_counts.items():
         item_counts[item] = count
+    return total_price, item_counts
+
 
