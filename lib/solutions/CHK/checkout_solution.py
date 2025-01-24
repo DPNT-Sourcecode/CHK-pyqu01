@@ -103,5 +103,8 @@ def _apply_same_item_free_offer(item_counts: Counter) -> Counter:
 
 
 def _apply_group_discount(item_counts: Counter) -> int:
-    pass
+    total_price = 0
+    current_group_item_count = 0
+    for item, count in item_counts.items():
+        pass
 
