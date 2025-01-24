@@ -50,7 +50,8 @@ def _apply_special_offer(item_counts: Counter) -> int:
 def _apply_free_offer(item_counts: Counter) -> Counter:
     for item, (required_qty, free_item) in FREE_OFFERS.items():
         if item in item_counts and free_item in item_counts:
-            free_count = item_counts[free_item] // required_qty
+            free_count = item_counts[item] // required_qty
             item_counts[free_item] = max(0, item_counts[free_item] - free_count)
     return item_counts
+
 
